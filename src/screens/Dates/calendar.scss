@@ -1,16 +1,16 @@
-.dates {
-  width: 1420px;
-}
-
-.sidebar {
-  float: left;
-  width: 220px;
-  text-align: right;
-}
-
 .calendar {
-  width: 1200px;
-  float: left;
+  margin-bottom: 16px;
+
+  &.loading {
+    @media (max-width: 780px) {
+      // display: none;
+    }
+    @media (min-width: 781px) {
+      .ant-fullcalendar-calendar-body {
+        display: none;
+      }
+    }
+  }
 
   .ant-fullcalendar-header {
     .ant-radio-group {
@@ -22,7 +22,7 @@
     position: absolute;
     top: 11px;
     right: 13px;
-    font-size: 32px;
+    font-size: 28px;
   }
 
   .ant-fullcalendar-fullscreen .ant-fullcalendar-content {
@@ -30,11 +30,30 @@
   }
 
   .ant-fullcalendar-fullscreen .ant-fullcalendar-date {
-    height: 122px;
+    height: 123px;
+    padding: 4px 6px;
   }
 
   .ant-fullcalendar-header {
-    text-align: left;
+    text-align: center;
     padding-left: 17px;
+  }
+
+  @media (max-width: 780px) {
+    .ant-fullcalendar-calendar-body {
+      display: none;
+    }
+  }
+}
+
+.calendar-list {
+  display: none;
+
+  @media (max-width: 780px) {
+    display: block;
+  }
+
+  .calendar-list-item {
+    height: 180px;
   }
 }

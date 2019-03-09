@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSitesRequest } from '../../actions/siteActions';
+import './sites.css';
 
 class Sites extends Component {
   componentDidMount() {
@@ -19,11 +20,13 @@ class Sites extends Component {
     return (
       <Fragment>
         <h1>Sites</h1>
-        {sites.map(o => (
-          <p key={o.Id}>
-            <Link to={`/${o.Id}`}>{o.Name}</Link>
-          </p>
-        ))}
+        <ul className="sites-list">
+          {sites.map(o => (
+            <li key={o.Id}>
+              <Link to={`/${o.Id}`}>{o.Name}</Link>
+            </li>
+          ))}
+        </ul>
       </Fragment>
     );
   }

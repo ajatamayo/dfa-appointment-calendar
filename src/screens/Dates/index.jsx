@@ -1,8 +1,10 @@
 import moment from 'moment';
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Calendar } from 'antd';
+import {
+  Calendar, Col, Row, Spin,
+} from 'antd';
 import { getDatesRequest } from '../../actions/dateActions';
 import { Navigation, SiteInfo, Timeslots } from '../../components';
 import './calendar.css';
@@ -39,21 +41,45 @@ class Dates extends Component {
   }
 
   render() {
-    const { sites } = this.props;
+    const { sites, dates, isFetching } = this.props;
     const { match: { params: { siteId } } } = this.props;
     const site = sites.find(i => i.Id.toString() === siteId);
     return (
       <div className="cf dates">
         <div className="sidebar">
-          {sites.length ? <SiteInfo site={site} /> : null}
-          <Navigation />
+          {sites.length ? (
+            <Fragment>
+              <SiteInfo site={site} />
+              <Navigation />
+            </Fragment>
+          ) : <Spin />}
         </div>
-        <Calendar
-          className="calendar"
-          dateCellRender={this.dateCellRender}
-          onPanelChange={this.onPanelChange}
-          validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
-        />
+        {sites.length ? (
+          <Calendar
+            className={`calendar ${(!sites.length || isFetching) ? 'loading' : ''}`}
+            dateCellRender={this.dateCellRender}
+            onPanelChange={this.onPanelChange}
+            validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
+          />
+        ) : null}
+        {isFetching && sites.length ? <Spin /> : null}
+        <div className="calendar-list">
+          {!isFetching ? (
+            <Row>
+              {Object.keys(dates).map((i) => {
+                if (dates[i]) {
+                  return (
+                    <Col key={i} xs={12} sm={8} md={6} className="calendar-list-item">
+                      <h3>{moment(i, 'YYYYMMDD').format('LL')}</h3>
+                      <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
+                    </Col>
+                  );
+                }
+                return null;
+              })}
+            </Row>
+          ) : null}
+        </div>
       </div>
     );
   }
@@ -76,10 +102,12 @@ Dates.propTypes = {
 const mapStateToProps = (state) => {
   const { dates: { dates, isFetching } } = state;
   const { sites: { sites } } = state;
+  const { timeslots: { timeslots } } = state;
 
   return {
     dates,
     sites,
+    timeslots,
     isFetching,
   };
 };

@@ -16,5 +16,9 @@
   input[type=radio]:not([disabled]) + span + span {
     display: block;
     line-height: 16px;
+
+    @media (max-width: 940px) and (min-width: 781px) {
+      font-size: 11px;
+    }
   }
 }
