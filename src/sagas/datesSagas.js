@@ -1,6 +1,6 @@
 import moment from 'moment';
 import {
-  all, call, put, takeLatest,
+  all, call, put, select, takeLatest,
 } from 'redux-saga/effects';
 
 import { GET_DATES_REQUEST } from '../actions/actionTypes';
@@ -9,9 +9,16 @@ import { appAlertError } from '../actions/appActions';
 import { getDatesService } from '../services/dates';
 import { getTimeslotsService } from '../services/timeslots';
 import { getTimeslotsSuccess } from '../actions/timeslotActions';
+import { getSitesFlow } from './sitesSagas';
+
+export const getSites = state => state.sites.sites;
 
 export function* getDatesFlow({ siteId, fromDate, toDate }) {
   try {
+    const sites = yield select(getSites);
+    if (!sites.length) {
+      yield call(getSitesFlow);
+    }
     const response = yield call(getDatesService, siteId, fromDate, toDate);
     const dates = response.data;
     const availableDates = dates.filter(i => i.IsAvailable).map(i => moment(i.AppointmentDate).format('YYYY-MM-DD'));

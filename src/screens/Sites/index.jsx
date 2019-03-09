@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSitesRequest } from '../../actions/siteActions';
-import { Navigation } from '../../components';
 
 class Sites extends Component {
   componentDidMount() {
@@ -25,7 +24,6 @@ class Sites extends Component {
             <Link to={`/${o.Id}`}>{o.Name}</Link>
           </p>
         ))}
-        <Navigation />
       </Fragment>
     );
   }

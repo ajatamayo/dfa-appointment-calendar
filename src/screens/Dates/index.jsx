@@ -1,10 +1,11 @@
 import moment from 'moment';
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Calendar } from 'antd';
 import { getDatesRequest } from '../../actions/dateActions';
-import { Navigation, Timeslots } from '../../components';
+import { Navigation, SiteInfo, Timeslots } from '../../components';
+import './calendar.css';
 
 class Dates extends Component {
   constructor(props) {
@@ -31,19 +32,29 @@ class Dates extends Component {
   dateCellRender(value) {
     const { dates } = this.props;
     const { match: { params: { siteId } } } = this.props;
-    return dates[value.format('YYYYMMDD')] ? <Timeslots preferredDate={value.format('YYYY-MM-DD')} siteId={siteId} /> : null;
+    if (dates[value.format('YYYYMMDD')]) {
+      return <Timeslots preferredDate={value.format('YYYY-MM-DD')} siteId={siteId} />;
+    }
+    return null;
   }
 
   render() {
-    const { isFetching } = this.props;
-
+    const { sites } = this.props;
+    const { match: { params: { siteId } } } = this.props;
+    const site = sites.find(i => i.Id.toString() === siteId);
     return (
-      <Fragment>
-        <h1>Dates</h1>
-        {isFetching ? <p>Fetching</p> : null}
-        <Calendar dateCellRender={this.dateCellRender} onPanelChange={this.onPanelChange} />
-        <Navigation />
-      </Fragment>
+      <div className="cf dates">
+        <div className="sidebar">
+          {sites.length ? <SiteInfo site={site} /> : null}
+          <Navigation />
+        </div>
+        <Calendar
+          className="calendar"
+          dateCellRender={this.dateCellRender}
+          onPanelChange={this.onPanelChange}
+          validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
+        />
+      </div>
     );
   }
 }
@@ -51,6 +62,8 @@ class Dates extends Component {
 Dates.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   dates: PropTypes.object.isRequired,
+  // eslint-disable-next-line react/forbid-prop-types
+  sites: PropTypes.array.isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       siteId: PropTypes.string.isRequired,
@@ -62,9 +75,11 @@ Dates.propTypes = {
 
 const mapStateToProps = (state) => {
   const { dates: { dates, isFetching } } = state;
+  const { sites: { sites } } = state;
 
   return {
     dates,
+    sites,
     isFetching,
   };
 };

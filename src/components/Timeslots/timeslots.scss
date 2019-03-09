@@ -1,0 +1,20 @@
+.timeslots {
+  input[type=radio] {
+    display: none;
+  }
+
+  input[disabled] {
+    ~ * {
+      display: none;
+    }
+  }
+
+  .text-danger, .text-success {
+    display: none;
+  }
+
+  input[type=radio]:not([disabled]) + span + span {
+    display: block;
+    line-height: 16px;
+  }
+}

@@ -1,13 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import './timeslots.css';
 
 const Timeslots = (props) => {
   const { timeslots } = props;
   const { preferredDate } = props;
   return (
     // eslint-disable-next-line react/no-danger
-    <div dangerouslySetInnerHTML={{ __html: timeslots[preferredDate] }} />
+    <div className="timeslots" dangerouslySetInnerHTML={{ __html: timeslots[preferredDate] }} />
   );
 };
 

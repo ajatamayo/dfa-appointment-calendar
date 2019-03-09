@@ -1,0 +1,40 @@
+.dates {
+  width: 1420px;
+}
+
+.sidebar {
+  float: left;
+  width: 220px;
+  text-align: right;
+}
+
+.calendar {
+  width: 1200px;
+  float: left;
+
+  .ant-fullcalendar-header {
+    .ant-radio-group {
+      display: none;
+    }
+  }
+
+  .ant-fullcalendar-value {
+    position: absolute;
+    top: 11px;
+    right: 13px;
+    font-size: 32px;
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-content {
+    height: 110px;
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-date {
+    height: 122px;
+  }
+
+  .ant-fullcalendar-header {
+    text-align: left;
+    padding-left: 17px;
+  }
+}
