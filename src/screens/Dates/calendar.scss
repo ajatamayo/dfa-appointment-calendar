@@ -1,30 +1,38 @@
+@import 'src/styles/variables';
+
 .dates {
+  @media (max-width: 1039px) {
+    .sidebar {
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba($cloudburst, 0.16);
+    }
+  }
+
   @media (min-width: 1040px) {
     display: flex;
+    text-align: right;
 
     .sidebar {
-      flex: 0 0 200px;
+      flex: 0 0 230px;
+      border-right: 1px solid rgba($cloudburst, 0.16);
     }
   }
 
   @media (min-width: 1276px) {
     > .sidebar {
-      flex: 0 0 250px;
+      flex: 0 0 300px;
     }
+  }
+
+  .sidebar {
+    background: white;
+    padding: 10px;
+    box-shadow: 0 0 12px rgba($cloudburst, 0.16);
   }
 }
 
 .dates > .calendar {
   margin-bottom: 16px;
-  margin: 0 auto;
-
-  &.loading {
-    @media (min-width: 780px) {
-      .ant-fullcalendar-calendar-body {
-        display: none;
-      }
-    }
-  }
 
   .ant-fullcalendar-header {
     .ant-radio-group {
@@ -52,6 +60,7 @@
   .ant-fullcalendar-fullscreen .ant-fullcalendar-date {
     height: 123px;
     padding: 4px 6px;
+    border-top-width: 1px;
   }
 
   .ant-fullcalendar-header {
@@ -72,7 +81,19 @@
   }
 
   .ant-select.ant-fullcalendar-month-select {
-    min-width: 90px;
+    min-width: 120px;
+  }
+
+  .ant-select.ant-fullcalendar-year-select {
+    min-width: 120px;
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-today .ant-fullcalendar-date {
+    border-top-color: $indigo;
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-value {
+    color: $indigo;
   }
 }
 

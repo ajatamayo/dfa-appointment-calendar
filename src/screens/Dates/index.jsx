@@ -2,9 +2,7 @@ import moment from 'moment';
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import {
-  Calendar, Col, Row, Spin,
-} from 'antd';
+import { Calendar, Spin } from 'antd';
 import { getDatesRequest } from '../../actions/dateActions';
 import { Navigation, SiteInfo, Timeslots } from '../../components';
 import './calendar.css';
@@ -56,7 +54,7 @@ class Dates extends Component {
         </div>
         {sites.length ? (
           <Calendar
-            className={`calendar ${(!sites.length || isFetching) ? 'loading' : ''}`}
+            className="calendar"
             dateCellRender={this.dateCellRender}
             onPanelChange={this.onPanelChange}
             validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
@@ -68,7 +66,7 @@ class Dates extends Component {
             Object.keys(dates).map((i) => {
               if (dates[i]) {
                 return (
-                  <div className="calendar-list-item">
+                  <div key={i} className="calendar-list-item">
                     <h3>{moment(i, 'YYYYMMDD').format('ll')}</h3>
                     <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
                   </div>

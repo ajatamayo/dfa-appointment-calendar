@@ -1,3 +1,5 @@
+@import "src/styles/variables";
+
 body {
   margin: 0;
   padding: 0;
@@ -6,6 +8,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: rgba($indigo, 0.015);
 }
 
 code {
@@ -15,6 +18,17 @@ code {
 
 .ant-table-pagination.ant-pagination {
   float: none;
+}
+
+.ant-spin {
+  @media (min-width: 1040px) {
+    position: fixed;
+    left: 247px;
+    top: 60px;
+  }
+  @media (min-width: 1276px) {
+    left: 318px;
+  }
 }
 
 /* =Clearfix
