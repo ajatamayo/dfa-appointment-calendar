@@ -4,7 +4,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Calendar, Spin } from 'antd';
 import { getDatesRequest } from '../../actions/dateActions';
-import { Navigation, SiteInfo, Timeslots } from '../../components';
+import {
+  Main, Navigation, Sidebar, SiteInfo, Timeslots,
+} from '../../components';
 import './calendar.css';
 
 class Dates extends Component {
@@ -43,40 +45,42 @@ class Dates extends Component {
     const { match: { params: { siteId } } } = this.props;
     const site = sites.find(i => i.Id.toString() === siteId);
     return (
-      <div className="dates">
-        <div className="sidebar">
+      <Fragment>
+        <Sidebar>
           {sites.length ? (
             <Fragment>
               <SiteInfo site={site} />
               <Navigation />
             </Fragment>
           ) : <Spin />}
-        </div>
-        {sites.length ? (
-          <Calendar
-            className="calendar"
-            dateCellRender={this.dateCellRender}
-            onPanelChange={this.onPanelChange}
-            validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
-          />
-        ) : null}
-        {isFetching && sites.length ? <Spin /> : null}
-        <div className="calendar-list">
-          {!isFetching ? (
-            Object.keys(dates).map((i) => {
-              if (dates[i]) {
-                return (
-                  <div key={i} className="calendar-list-item">
-                    <h3>{moment(i, 'YYYYMMDD').format('ll')}</h3>
-                    <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
-                  </div>
-                );
-              }
-              return null;
-            })
+        </Sidebar>
+        <Main>
+          {sites.length ? (
+            <Calendar
+              className="calendar"
+              dateCellRender={this.dateCellRender}
+              onPanelChange={this.onPanelChange}
+              validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
+            />
           ) : null}
-        </div>
-      </div>
+          {isFetching && sites.length ? <Spin /> : null}
+          <div className="calendar-list">
+            {!isFetching ? (
+              Object.keys(dates).map((i) => {
+                if (dates[i]) {
+                  return (
+                    <div key={i} className="calendar-list-item">
+                      <h3>{moment(i, 'YYYYMMDD').format('ll')}</h3>
+                      <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
+                    </div>
+                  );
+                }
+                return null;
+              })
+            ) : null}
+          </div>
+        </Main>
+      </Fragment>
     );
   }
 }

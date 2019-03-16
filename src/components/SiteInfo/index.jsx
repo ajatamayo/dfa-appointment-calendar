@@ -7,9 +7,9 @@ const SiteInfo = (props) => {
   return (
     <Fragment>
       <h1>{site.Name}</h1>
-      <p>{site.Description}</p>
-      <p>{site.Address}</p>
-      <p>{site.Telephone}</p>
+      <p className="description">{site.Description}</p>
+      <p className="address">{site.Address}</p>
+      <p className="telephone">{site.Telephone}</p>
     </Fragment>
   );
 };

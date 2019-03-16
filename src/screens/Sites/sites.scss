@@ -1,6 +1,65 @@
+@import 'src/styles/variables';
+
+.sites-header {
+  padding: 0 20px;
+}
+
 .sites-list {
   list-style: none;
-  padding: 0;
   font-size: 15px;
   line-height: 30px;
+  text-align: left;
+  padding: 29px 20px 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: stretch;
+
+  @media (min-width: 1040px) {
+    justify-content: flex-start;
+  }
+
+  li {
+    flex-basis: 290px;
+    border-top: 1px solid #e8e8e8;
+    padding: 0 10px;
+    margin-bottom: 3px;
+
+    @media (min-width: 1040px) {
+      margin-right: 30px;
+    }
+
+    &:hover {
+      background: #e6f7ff;
+    }
+  }
+
+  h1 {
+    font-size: 20px;
+  }
+
+  a {
+    color: $offblack;
+
+    &:hover {
+      color: $offblack;
+    }
+  }
+
+  .description {
+    font-size: 14px;
+    margin-bottom: 0;
+  }
+
+  .address {
+    font-size: 13px;
+    line-height: 19px;
+    margin-bottom: 0;
+  }
+
+  .telephone {
+    font-size: 12px;
+  }
 }

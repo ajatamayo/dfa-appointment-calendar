@@ -1,39 +1,6 @@
 @import 'src/styles/variables';
 
-.dates {
-  @media (max-width: 1039px) {
-    .sidebar {
-      margin-bottom: 20px;
-      border-bottom: 1px solid rgba($cloudburst, 0.16);
-    }
-  }
-
-  @media (min-width: 1040px) {
-    display: flex;
-    text-align: right;
-
-    .sidebar {
-      flex: 0 0 230px;
-      border-right: 1px solid rgba($cloudburst, 0.16);
-    }
-  }
-
-  @media (min-width: 1276px) {
-    > .sidebar {
-      flex: 0 0 300px;
-    }
-  }
-
-  .sidebar {
-    background: white;
-    padding: 10px;
-    box-shadow: 0 0 12px rgba($cloudburst, 0.16);
-  }
-}
-
-.dates > .calendar {
-  margin-bottom: 16px;
-
+.calendar {
   .ant-fullcalendar-header {
     .ant-radio-group {
       display: none;
@@ -46,7 +13,7 @@
     right: 13px;
     font-size: 28px;
 
-    @media (max-width: 1170px) {
+    @media (max-width: 1180px) {
       top: 6px;
       right: 10px;
       font-size: 16px;
@@ -110,7 +77,7 @@
   }
 
   .calendar-list-item {
-    height: 180px;
     flex-basis: 144px;
+    margin-bottom: 20px;
   }
 }

@@ -1,5 +1,5 @@
 @import url(~antd/dist/antd.css);
-$turquiose-blue: #51D8E1;
+@import 'src/styles/variables';
 
 .app {
   padding: 0;
@@ -13,5 +13,43 @@ $turquiose-blue: #51D8E1;
 
   h1 {
     margin-top: 10px;
+  }
+
+  @media (max-width: 1039px) {
+    .sidebar {
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba($cloudburst, 0.16);
+    }
+  }
+
+  @media (min-width: 1040px) {
+    display: flex;
+
+    .sidebar {
+      flex: 0 0 230px;
+      border-right: 1px solid rgba($cloudburst, 0.16);
+      text-align: right;
+    }
+
+    .main {
+      text-align: left;
+    }
+  }
+
+  @media (min-width: 1276px) {
+    > .sidebar {
+      flex: 0 0 300px;
+    }
+  }
+
+  .sidebar {
+    background: white;
+    padding: 10px;
+    box-shadow: 0 0 12px rgba($cloudburst, 0.16);
+  }
+
+  > .main {
+    margin-bottom: 16px;
+    width: 100%;
   }
 }

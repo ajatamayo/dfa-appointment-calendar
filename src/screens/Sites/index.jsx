@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { getSitesRequest } from '../../actions/siteActions';
+import { Main, Sidebar, SiteInfo } from '../../components';
 import './sites.css';
 
 class Sites extends Component {
@@ -19,14 +20,21 @@ class Sites extends Component {
 
     return (
       <Fragment>
-        <h1>Sites</h1>
-        <ul className="sites-list">
-          {sites.map(o => (
-            <li key={o.Id}>
-              <Link to={`/${o.Id}`}>{o.Name}</Link>
-            </li>
-          ))}
-        </ul>
+        <Sidebar>
+          <p>Welcome!</p>
+        </Sidebar>
+        <Main>
+          <h1 className="sites-header">Sites</h1>
+          <ul className="sites-list">
+            {sites.map(o => (
+              <li key={o.Id}>
+                <Link to={`/${o.Id}`}>
+                  <SiteInfo site={o} />
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </Main>
       </Fragment>
     );
   }
