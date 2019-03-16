@@ -45,7 +45,7 @@ class Dates extends Component {
     const { match: { params: { siteId } } } = this.props;
     const site = sites.find(i => i.Id.toString() === siteId);
     return (
-      <div className="cf dates">
+      <div className="dates">
         <div className="sidebar">
           {sites.length ? (
             <Fragment>
@@ -65,19 +65,17 @@ class Dates extends Component {
         {isFetching && sites.length ? <Spin /> : null}
         <div className="calendar-list">
           {!isFetching ? (
-            <Row>
-              {Object.keys(dates).map((i) => {
-                if (dates[i]) {
-                  return (
-                    <Col key={i} xs={12} sm={8} md={6} className="calendar-list-item">
-                      <h3>{moment(i, 'YYYYMMDD').format('LL')}</h3>
-                      <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
-                    </Col>
-                  );
-                }
-                return null;
-              })}
-            </Row>
+            Object.keys(dates).map((i) => {
+              if (dates[i]) {
+                return (
+                  <div className="calendar-list-item">
+                    <h3>{moment(i, 'YYYYMMDD').format('ll')}</h3>
+                    <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
+                  </div>
+                );
+              }
+              return null;
+            })
           ) : null}
         </div>
       </div>
