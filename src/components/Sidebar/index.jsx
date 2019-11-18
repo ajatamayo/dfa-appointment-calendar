@@ -1,9 +1,12 @@
 import React from 'react';
+import { Affix } from 'antd';
 
 const Sidebar = props => (
   <div className="sidebar">
-    {/* eslint-disable-next-line react/prop-types */}
-    {props.children}
+    <Affix>
+      {/* eslint-disable-next-line react/prop-types */}
+      {props.children}
+    </Affix>
   </div>
 );
 
