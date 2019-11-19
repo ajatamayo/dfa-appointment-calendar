@@ -4,7 +4,6 @@ import {
   Switch,
   withRouter,
 } from 'react-router-dom';
-import { connect } from 'react-redux';
 import {
   AppAlert,
 } from '../components';
@@ -17,6 +16,8 @@ import './App.css';
 const App = () => (
   <div className="app">
     <AppAlert />
+    <p>pasaporte.ph</p>
+    <p>See all available appointment timeslots for the whole month!</p>
     <Switch>
       <Route exact path="/" render={ownProps => <Sites {...ownProps} />} />
       <Route exact path="/:siteId" render={ownProps => <Dates {...ownProps} />} />
@@ -24,8 +25,4 @@ const App = () => (
   </div>
 );
 
-const mapStateToProps = () => ({});
-
-const mapDispatchToProps = {};
-
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App));
+export default withRouter(App);

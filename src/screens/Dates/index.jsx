@@ -3,9 +3,9 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Calendar, Spin } from 'antd';
-import { getDatesRequest } from '../../actions/dateActions';
+import { getDatesRequest, setDate } from '../../actions/dateActions';
 import {
-  Main, Navigation, Sidebar, SiteInfo, Timeslots,
+  Main, Timeslots,
 } from '../../components';
 import './calendar.css';
 
@@ -29,6 +29,7 @@ class Dates extends Component {
     const startDate = value.startOf('month').format('YYYY-MM-DD');
     const endDate = value.endOf('month').format('YYYY-MM-DD');
     this.props.getDatesRequest(siteId, startDate, endDate);
+    this.props.setDate(value);
   }
 
   dateCellRender(value) {
@@ -43,17 +44,8 @@ class Dates extends Component {
   render() {
     const { sites, dates, isFetching } = this.props;
     const { match: { params: { siteId } } } = this.props;
-    const site = sites.find(i => i.Id.toString() === siteId);
     return (
       <Fragment>
-        <Sidebar>
-          {sites.length ? (
-            <Fragment>
-              <SiteInfo site={site} />
-              <Navigation />
-            </Fragment>
-          ) : <Spin />}
-        </Sidebar>
         <Main>
           {sites.length ? (
             <Calendar
@@ -97,6 +89,7 @@ Dates.propTypes = {
   }).isRequired,
   isFetching: PropTypes.bool.isRequired,
   getDatesRequest: PropTypes.func.isRequired,
+  setDate: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => {
@@ -114,6 +107,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
   getDatesRequest,
+  setDate,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dates);

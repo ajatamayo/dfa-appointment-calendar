@@ -4,11 +4,13 @@ import {
   GET_DATES_REQUEST,
   GET_DATES_SUCCESS,
   GET_DATES_FAILURE,
+  SET_DATE,
 } from '../actions/actionTypes';
 
 const initialState = {
   dates: {},
   isFetching: false,
+  activeDate: moment(),
 };
 
 function datesReducer(state = initialState, action) {
@@ -36,6 +38,13 @@ function datesReducer(state = initialState, action) {
         ...state,
         dates: {},
         isFetching: false,
+      };
+    }
+
+    case SET_DATE: {
+      return {
+        ...state,
+        activeDate: action.date,
       };
     }
 

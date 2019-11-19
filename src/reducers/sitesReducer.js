@@ -2,11 +2,13 @@ import {
   GET_SITES_REQUEST,
   GET_SITES_SUCCESS,
   GET_SITES_FAILURE,
+  SET_SITE,
 } from '../actions/actionTypes';
 
 const initialState = {
   sites: [],
   isFetching: false,
+  activeSite: null,
 };
 
 function siteReducer(state = initialState, action) {
@@ -33,6 +35,12 @@ function siteReducer(state = initialState, action) {
         isFetching: false,
       };
     }
+
+    case SET_SITE:
+      return {
+        ...state,
+        activeSite: action.siteId,
+      };
 
     default:
       return state;
