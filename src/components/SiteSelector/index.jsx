@@ -10,11 +10,6 @@ const { Option } = Select;
 class SiteSelector extends Component {
   componentDidMount() {
     this.props.getSitesRequest();
-
-    const { defaultSite } = this.props;
-    if (defaultSite) {
-      this.props.setSite(defaultSite);
-    }
   }
 
   onSiteSelect = (value) => {
@@ -22,11 +17,12 @@ class SiteSelector extends Component {
   }
 
   render() {
-    const { sites, isFetching, defaultSite } = this.props;
-
+    const { sites, isFetching, pathname } = this.props;
     if (isFetching) {
       return <p>Loading sites...</p>;
     }
+
+    const defaultSite = pathname.length ? pathname.split('/')[1] : '';
 
     return (
       <Fragment>
@@ -49,17 +45,18 @@ class SiteSelector extends Component {
 SiteSelector.propTypes = {
   sites: PropTypes.arrayOf(PropTypes.object).isRequired,
   isFetching: PropTypes.bool.isRequired,
-  defaultSite: PropTypes.string.isRequired,
   getSitesRequest: PropTypes.func.isRequired,
   setSite: PropTypes.func.isRequired,
+  pathname: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => {
   const { sites: { sites, isFetching } } = state;
-
+  const { router: { location: { pathname } } } = state;
   return {
     sites,
     isFetching,
+    pathname,
   };
 };
 
