@@ -15,3 +15,4 @@ export const GET_TIMESLOTS_FAILURE = 'GET_TIMESLOTS_FAILURE';
 
 export const SET_SITE = 'SET_SITE';
 export const SET_DATE = 'SET_DATE';
+export const SET_MONTH = 'SET_MONTH';

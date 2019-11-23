@@ -2,8 +2,9 @@ import moment from 'moment';
 import {
   all, call, put, select, takeLatest,
 } from 'redux-saga/effects';
+import { push } from 'react-router-redux';
 
-import { GET_DATES_REQUEST } from '../actions/actionTypes';
+import { GET_DATES_REQUEST, SET_MONTH } from '../actions/actionTypes';
 import { getDatesSuccess } from '../actions/dateActions';
 import { appAlertError } from '../actions/appActions';
 import { getDatesService } from '../services/dates';
@@ -35,9 +36,14 @@ export function* getDatesFlow({ siteId, fromDate, toDate }) {
   }
 }
 
+export function* setMonthFlow({ date, siteId }) {
+  yield put(push(`/${siteId}/${moment(date).format('MM-YYYY')}`));
+}
+
 export function* watchDatesFlow() {
   yield all([
     takeLatest(GET_DATES_REQUEST, getDatesFlow),
+    takeLatest(SET_MONTH, setMonthFlow),
   ]);
 }
 

@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   all, call, put, select, takeLatest,
 } from 'redux-saga/effects';
@@ -11,6 +12,7 @@ import { getDatesFlow } from './datesSagas';
 
 export const getSites = state => state.sites.sites;
 export const getActiveDate = state => state.dates.activeDate;
+export const getActiveMonth = state => state.dates.activeMonth;
 
 export function* getSitesFlow() {
   try {
@@ -30,10 +32,11 @@ export function* getSitesFlow() {
 
 export function* setSiteFlow({ siteId }) {
   if (siteId) {
-    yield put(push(`/${siteId}`));
-    const activeDate = yield select(getActiveDate);
-    const fromDate = activeDate.startOf('month').format('YYYY-MM-DD');
-    const toDate = activeDate.endOf('month').format('YYYY-MM-DD');
+    const activeMonth = yield select(getActiveMonth);
+    const monthToShow = activeMonth ? moment(activeMonth) : yield select(getActiveDate);
+    yield put(push(activeMonth ? `/${siteId}/${moment(activeMonth).format('MM-YYYY')}` : `/${siteId}`));
+    const fromDate = monthToShow.startOf('month').format('YYYY-MM-DD');
+    const toDate = monthToShow.endOf('month').format('YYYY-MM-DD');
     yield call(getDatesFlow, { siteId, fromDate, toDate });
   } else {
     yield put(push('/'));

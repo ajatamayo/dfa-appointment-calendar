@@ -3,7 +3,7 @@ import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Button, Calendar, Spin } from 'antd';
-import { getDatesRequest, setDate } from '../../actions/dateActions';
+import { getDatesRequest, setDate, setMonth } from '../../actions/dateActions';
 import {
   Main, Timeslots,
 } from '../../components';
@@ -20,9 +20,15 @@ class Dates extends Component {
   }
 
   componentDidMount() {
-    const { match: { params: { siteId } } } = this.props;
-    const startDate = moment().startOf('month').format('YYYY-MM-DD');
-    const endDate = moment().endOf('month').format('YYYY-MM-DD');
+    const { match: { params: { siteId, month } } } = this.props;
+    const value = month ? moment(`01-${month}`, 'DD-MM-YYYY') : moment();
+    const startDate = value.startOf('month').format('YYYY-MM-DD');
+    const endDate = value.endOf('month').format('YYYY-MM-DD');
+
+    if (month) {
+      this.props.setMonth(moment(`01-${month}`, 'DD-MM-YYYY').format(), siteId);
+    }
+
     this.props.getDatesRequest(siteId, startDate, endDate);
   }
 
@@ -44,14 +50,17 @@ class Dates extends Component {
   }
 
   render() {
-    const { sites, dates, isFetching } = this.props;
-    const { match: { params: { siteId } } } = this.props;
+    const {
+      sites, dates, isFetching, activeMonth,
+    } = this.props;
+    const { match: { params: { siteId, month } } } = this.props;
     const validMonthsCount = 3;
     const validRange = [moment(), moment().startOf('month').add(validMonthsCount - 1, 'months').endOf('month')];
     const validMonths = [];
     for (let i = 0; i < validMonthsCount; i += 1) {
       validMonths.push(moment().startOf('month').add(i, 'months'));
     }
+    const value = activeMonth ? moment(activeMonth) : moment();
     return (
       <Fragment>
         <Main>
@@ -61,12 +70,23 @@ class Dates extends Component {
               dateCellRender={this.dateCellRender}
               onPanelChange={this.onPanelChange}
               validRange={validRange}
+              value={value}
               headerRender={({ onChange }) => (
                 <div>
                   <div style={{ marginBottom: '10px' }}>Next, select a month:</div>
                   <ButtonGroup>
                     {validMonths.map(o => (
-                      <Button key={o.format('MMM YYYY')} size="large" onClick={() => onChange(o)}>{o.format('MMM YYYY')}</Button>
+                      <Button
+                        key={o.format('MMM YYYY')}
+                        size="large"
+                        onClick={() => {
+                          onChange(o);
+                          this.props.setMonth(o.format(), siteId);
+                        }}
+                        type={month === o.format('MM-YYYY') ? 'primary' : 'default'}
+                      >
+                        {o.format('MMM YYYY')}
+                      </Button>
                     ))}
                   </ButtonGroup>
                 </div>
@@ -103,29 +123,37 @@ Dates.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
       siteId: PropTypes.string.isRequired,
+      month: PropTypes.string,
     }).isRequired,
   }).isRequired,
   isFetching: PropTypes.bool.isRequired,
   getDatesRequest: PropTypes.func.isRequired,
   setDate: PropTypes.func.isRequired,
+  setMonth: PropTypes.func.isRequired,
+  activeMonth: PropTypes.string,
+};
+
+Dates.defaultProps = {
+  activeMonth: '',
 };
 
 const mapStateToProps = (state) => {
-  const { dates: { dates, isFetching } } = state;
+  const { dates: { dates, isFetching, activeMonth } } = state;
   const { sites: { sites } } = state;
   const { timeslots: { timeslots } } = state;
-
   return {
     dates,
     sites,
     timeslots,
     isFetching,
+    activeMonth,
   };
 };
 
 const mapDispatchToProps = {
   getDatesRequest,
   setDate,
+  setMonth,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dates);

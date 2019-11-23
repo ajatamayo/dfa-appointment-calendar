@@ -23,6 +23,7 @@ const App = () => (
     <Switch>
       <Route exact path="/" render={ownProps => <Sites {...ownProps} />} />
       <Route exact path="/:siteId" render={ownProps => <Dates {...ownProps} />} />
+      <Route exact path="/:siteId/:month" render={ownProps => <Dates {...ownProps} />} />
     </Switch>
   </div>
 );

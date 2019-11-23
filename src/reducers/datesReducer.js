@@ -5,12 +5,14 @@ import {
   GET_DATES_SUCCESS,
   GET_DATES_FAILURE,
   SET_DATE,
+  SET_MONTH,
 } from '../actions/actionTypes';
 
 const initialState = {
   dates: {},
   isFetching: false,
   activeDate: moment(),
+  activeMonth: null,
 };
 
 function datesReducer(state = initialState, action) {
@@ -45,6 +47,13 @@ function datesReducer(state = initialState, action) {
       return {
         ...state,
         activeDate: action.date,
+      };
+    }
+
+    case SET_MONTH: {
+      return {
+        ...state,
+        activeMonth: action.date,
       };
     }
 
