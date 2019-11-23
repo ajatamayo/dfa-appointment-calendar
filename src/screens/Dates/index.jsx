@@ -2,12 +2,14 @@ import moment from 'moment';
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Calendar, Spin } from 'antd';
+import { Button, Calendar, Spin } from 'antd';
 import { getDatesRequest, setDate } from '../../actions/dateActions';
 import {
   Main, Timeslots,
 } from '../../components';
 import './calendar.css';
+
+const ButtonGroup = Button.Group;
 
 class Dates extends Component {
   constructor(props) {
@@ -44,6 +46,12 @@ class Dates extends Component {
   render() {
     const { sites, dates, isFetching } = this.props;
     const { match: { params: { siteId } } } = this.props;
+    const validMonthsCount = 3;
+    const validRange = [moment(), moment().startOf('month').add(validMonthsCount - 1, 'months').endOf('month')];
+    const validMonths = [];
+    for (let i = 0; i < validMonthsCount; i += 1) {
+      validMonths.push(moment().startOf('month').add(i, 'months'));
+    }
     return (
       <Fragment>
         <Main>
@@ -52,7 +60,17 @@ class Dates extends Component {
               className="calendar"
               dateCellRender={this.dateCellRender}
               onPanelChange={this.onPanelChange}
-              validRange={[moment(), moment().startOf('month').add(2, 'months').endOf('month')]}
+              validRange={validRange}
+              headerRender={({ onChange }) => (
+                <div>
+                  <div style={{ marginBottom: '10px' }}>Next, select a month:</div>
+                  <ButtonGroup>
+                    {validMonths.map(o => (
+                      <Button key={o.format('MMM YYYY')} size="large" onClick={() => onChange(o)}>{o.format('MMM YYYY')}</Button>
+                    ))}
+                  </ButtonGroup>
+                </div>
+              )}
             />
           ) : null}
           {isFetching && sites.length ? <Spin /> : null}
