@@ -9,7 +9,9 @@ const { Option } = Select;
 
 class SiteSelector extends Component {
   componentDidMount() {
-    this.props.getSitesRequest();
+    const { pathname } = this.props;
+    const defaultSiteSlug = pathname.length ? pathname.split('/')[1] : '';
+    this.props.getSitesRequest(defaultSiteSlug);
   }
 
   onSiteSelect = (value) => {
@@ -17,13 +19,14 @@ class SiteSelector extends Component {
   }
 
   render() {
-    const { sites, isFetching, pathname } = this.props;
-    if (isFetching) {
+    const { sites, pathname } = this.props;
+    if (!sites.length) {
       return <p>Loading sites...</p>;
     }
 
-    const defaultSite = pathname.length ? pathname.split('/')[1] : '';
-
+    const defaultSiteSlug = pathname.length ? pathname.split('/')[1] : '';
+    const defaultSite = sites.find(site => site.slug === defaultSiteSlug);
+    const defaultSiteId = defaultSite ? defaultSite.Id : null;
     return (
       <Fragment>
         <p>First, select a site:</p>
@@ -31,10 +34,10 @@ class SiteSelector extends Component {
           size="large"
           onChange={this.onSiteSelect}
           style={{ minWidth: 360 }}
-          defaultValue={defaultSite}
+          defaultValue={defaultSiteId}
         >
           {sites.map(o => (
-            <Option key={o.Id}>{o.Name}</Option>
+            <Option key={o.Id} value={o.Id}>{o.Name}</Option>
           ))}
         </Select>
       </Fragment>
@@ -44,7 +47,6 @@ class SiteSelector extends Component {
 
 SiteSelector.propTypes = {
   sites: PropTypes.arrayOf(PropTypes.object).isRequired,
-  isFetching: PropTypes.bool.isRequired,
   getSitesRequest: PropTypes.func.isRequired,
   setSite: PropTypes.func.isRequired,
   pathname: PropTypes.string.isRequired,

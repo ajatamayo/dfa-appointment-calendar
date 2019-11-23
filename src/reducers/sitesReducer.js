@@ -23,7 +23,17 @@ function siteReducer(state = initialState, action) {
       const { sites } = action;
       return {
         ...state,
-        sites,
+        sites: sites.map(site => ({
+          ...site,
+          slug: site.Name
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[^a-zA-Z ]/g, ' ')
+            .split(' ')
+            .filter(Boolean)
+            .join('-')
+            .toLowerCase(),
+        })),
         isFetching: false,
       };
     }

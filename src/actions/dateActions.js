@@ -6,9 +6,9 @@ import {
   SET_MONTH,
 } from './actionTypes';
 
-export function getDatesRequest(siteId, fromDate, toDate) {
+export function getDatesRequest(siteId, fromDate, toDate, siteSlug) {
   return {
-    type: GET_DATES_REQUEST, siteId, fromDate, toDate,
+    type: GET_DATES_REQUEST, siteId, fromDate, toDate, siteSlug,
   };
 }
 

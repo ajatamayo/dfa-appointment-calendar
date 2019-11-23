@@ -14,22 +14,24 @@ import { getSitesFlow } from './sitesSagas';
 
 export const getSites = state => state.sites.sites;
 
-export function* getDatesFlow({ siteId, fromDate, toDate }) {
+export function* getDatesFlow({ siteId, fromDate, toDate, siteSlug }) {
   try {
     const sites = yield select(getSites);
     if (!sites.length) {
-      yield call(getSitesFlow);
+      yield call(getSitesFlow, { siteSlug });
+    } else {
+      const derivedSiteId = siteId || sites.find(site => site.slug === siteSlug).Id;
+      const response = yield call(getDatesService, derivedSiteId, fromDate, toDate);
+      const dates = response.data;
+      const availableDates = dates.filter(i => i.IsAvailable).map(i => moment(i.AppointmentDate).format('YYYY-MM-DD'));
+      const responses = yield all(availableDates.map(preferredDate => (
+        call(getTimeslotsService, derivedSiteId, preferredDate)
+      )));
+      for (let i = 0; i < availableDates.length; i += 1) {
+        yield put(getTimeslotsSuccess(responses[i].data, moment(availableDates[i]).format('YYYY-MM-DD')));
+      }
+      yield put(getDatesSuccess(dates));
     }
-    const response = yield call(getDatesService, siteId, fromDate, toDate);
-    const dates = response.data;
-    const availableDates = dates.filter(i => i.IsAvailable).map(i => moment(i.AppointmentDate).format('YYYY-MM-DD'));
-    const responses = yield all(availableDates.map(preferredDate => (
-      call(getTimeslotsService, siteId, preferredDate)
-    )));
-    for (let i = 0; i < availableDates.length; i += 1) {
-      yield put(getTimeslotsSuccess(responses[i].data, moment(availableDates[i]).format('YYYY-MM-DD')));
-    }
-    yield put(getDatesSuccess(dates));
   } catch (error) {
     const { message } = error.response.data;
     yield put(appAlertError(message, error));

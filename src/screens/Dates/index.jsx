@@ -29,14 +29,14 @@ class Dates extends Component {
       this.props.setMonth(moment(`01-${month}`, 'DD-MM-YYYY').format(), siteId);
     }
 
-    this.props.getDatesRequest(siteId, startDate, endDate);
+    this.props.getDatesRequest(undefined, startDate, endDate, siteId);
   }
 
   onPanelChange(value) {
     const { match: { params: { siteId } } } = this.props;
     const startDate = value.startOf('month').format('YYYY-MM-DD');
     const endDate = value.endOf('month').format('YYYY-MM-DD');
-    this.props.getDatesRequest(siteId, startDate, endDate);
+    this.props.getDatesRequest(undefined, startDate, endDate, siteId);
     this.props.setDate(value);
   }
 

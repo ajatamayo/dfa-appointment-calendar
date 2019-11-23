@@ -5,8 +5,8 @@ import {
   SET_SITE,
 } from './actionTypes';
 
-export function getSitesRequest() {
-  return { type: GET_SITES_REQUEST };
+export function getSitesRequest(siteSlug) {
+  return { type: GET_SITES_REQUEST, siteSlug };
 }
 
 export function getSitesSuccess(sites) {
