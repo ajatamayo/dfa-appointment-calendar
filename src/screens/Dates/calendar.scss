@@ -41,7 +41,7 @@
     }
   }
 
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     .ant-fullcalendar-calendar-body {
       display: none;
     }
@@ -73,7 +73,7 @@
   margin-top: 20px;
   text-align: center;
 
-  @media (max-width: 860px) {
+  @media (max-width: 960px) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
