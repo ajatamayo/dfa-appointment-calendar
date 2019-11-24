@@ -105,7 +105,8 @@ class Dates extends Component {
                 if (dates[i]) {
                   return (
                     <div key={i} className="calendar-list-item">
-                      <h3>{moment(i, 'YYYYMMDD').format('ll')}</h3>
+                      <p className="date-day-month">{moment(i, 'YYYYMMDD').format('ddd [|] MMM')}</p>
+                      <p className="date-day">{moment(i, 'YYYYMMDD').format('DD')}</p>
                       <Timeslots preferredDate={moment(i, 'YYYYMMDD').format('YYYY-MM-DD')} siteId={siteId} />
                     </div>
                   );

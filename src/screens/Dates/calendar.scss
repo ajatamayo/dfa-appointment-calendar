@@ -71,6 +71,7 @@
 .calendar-list {
   display: none;
   margin-top: 20px;
+  text-align: center;
 
   @media (max-width: 860px) {
     display: flex;
@@ -81,8 +82,18 @@
   }
 
   .calendar-list-item {
-    flex-basis: 144px;
+    flex-basis: 100px;
     margin-bottom: 20px;
+  }
+
+  .date-day-month {
+    margin-bottom: 0;
+  }
+
+  .date-day {
+    margin-bottom: 0;
+    font-size: 40px;
+    font-family: $serif-font-stack;
   }
 }
 
