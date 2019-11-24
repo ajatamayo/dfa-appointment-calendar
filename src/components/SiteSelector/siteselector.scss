@@ -5,5 +5,11 @@
 }
 
 .site-selector-container {
-  text-align: center;
+  @media (max-width: 860px) {
+    text-align: center;
+  }
+
+  @media (min-width: 861px) {
+    padding-left: 20px;
+  }
 }

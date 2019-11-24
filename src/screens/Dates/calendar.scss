@@ -12,8 +12,10 @@
     top: 11px;
     right: 13px;
     font-size: 28px;
+    font-family: $serif-font-stack;
+    font-weight: 700;
 
-    @media (max-width: 1180px) {
+    @media (max-width: 1259px) {
       top: 6px;
       right: 10px;
       font-size: 16px;
@@ -34,14 +36,34 @@
     text-align: center;
     padding-left: 0;
     padding-right: 0;
-
-    @media (min-width: 1040px) {
-      text-align: left;
-      padding-left: 17px;
-    }
   }
 
-  @media (max-width: 960px) {
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-month-panel-current-cell .ant-fullcalendar-month,
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-today .ant-fullcalendar-date {
+    border-top-color: #e8e8e8;
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-month,
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-date {
+    background: none;
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value,
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-value {
+    color: rgba(0, 0, 0, 0.65);
+  }
+
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-month:hover,
+  .ant-fullcalendar-fullscreen .ant-fullcalendar-date:hover {
+    background: none;
+    cursor: default;
+  }
+
+  .ant-fullcalendar-value:hover {
+    cursor: default;
+  }
+
+  @media (max-width: 860px) {
     .ant-fullcalendar-calendar-body {
       display: none;
     }
@@ -55,14 +77,6 @@
     min-width: 120px;
   }
 
-  .ant-fullcalendar-fullscreen .ant-fullcalendar-today .ant-fullcalendar-date {
-    border-top-color: $indigo;
-  }
-
-  .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-value {
-    color: $indigo;
-  }
-
   .calendar.hide-dates {
     display: none;
   }
@@ -73,7 +87,7 @@
   margin-top: 20px;
   text-align: center;
 
-  @media (max-width: 960px) {
+  @media (max-width: 860px) {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -98,6 +112,13 @@
 }
 
 .months-selector-container {
-  text-align: center;
   margin-bottom: 1.5em;
+
+  @media (max-width: 860px) {
+    text-align: center;
+  }
+
+  @media (min-width: 861px) {
+    padding-left: 20px;
+  }
 }

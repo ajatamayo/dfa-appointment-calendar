@@ -28,6 +28,14 @@
   @media (min-width: 861px) {
     max-width: 800px;
   }
+
+  @media (min-width: 1090px) {
+    max-width: 960px;
+  }
+
+  @media (min-width: 1260px) {
+    max-width: 1130px;
+  }
 }
 
 .pointer {
@@ -91,5 +99,11 @@
 }
 
 .slogan {
-  text-align: center;
+  @media (max-width: 860px) {
+    text-align: center;
+  }
+
+  @media (min-width: 861px) {
+    padding-left: 20px;
+  }
 }

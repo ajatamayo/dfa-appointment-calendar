@@ -71,6 +71,12 @@ class Dates extends Component {
               onPanelChange={this.onPanelChange}
               validRange={validRange}
               value={value}
+              disabledDate={(currentDate) => {
+                if (!activeMonth) return false;
+                const monthStart = moment(activeMonth).startOf('month');
+                const monthEnd = moment(activeMonth).endOf('month');
+                return !currentDate.isBetween(monthStart, monthEnd, null, '[]');
+              }}
               headerRender={({ onChange }) => (
                 <Fragment>
                   <div className="pointer">Next, select a month:</div>
