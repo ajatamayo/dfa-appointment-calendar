@@ -72,24 +72,29 @@ class Dates extends Component {
               validRange={validRange}
               value={value}
               headerRender={({ onChange }) => (
-                <div>
-                  <div style={{ marginBottom: '10px' }}>Next, select a month:</div>
-                  <ButtonGroup>
-                    {validMonths.map(o => (
-                      <Button
-                        key={o.format('MMM YYYY')}
-                        size="large"
-                        onClick={() => {
-                          onChange(o);
-                          this.props.setMonth(o.format(), siteId);
-                        }}
-                        type={month === o.format('MM-YYYY') ? 'primary' : 'default'}
-                      >
-                        {o.format('MMM YYYY')}
-                      </Button>
-                    ))}
-                  </ButtonGroup>
-                </div>
+                <Fragment>
+                  <div className="pointer">Next, select a month:</div>
+                  <div className="months-selector-container">
+                    <ButtonGroup>
+                      {validMonths.map(o => (
+                        <Button
+                          key={o.format('MMM YYYY')}
+                          size="large"
+                          onClick={() => {
+                            onChange(o);
+                            this.props.setMonth(o.format(), siteId);
+                          }}
+                          type={month === o.format('MM-YYYY') ? 'primary' : 'default'}
+                        >
+                          {o.format('MMM YYYY')}
+                        </Button>
+                      ))}
+                    </ButtonGroup>
+                  </div>
+                  {activeMonth ? (
+                    <p className="slogan">Here are all available slots per day for this month. Enjoy!</p>
+                  ) : null}
+                </Fragment>
               )}
             />
           ) : null}

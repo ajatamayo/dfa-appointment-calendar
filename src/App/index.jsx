@@ -19,8 +19,13 @@ import './App.css';
 const App = props => (
   <div className="app">
     <AppAlert />
-    <p>pasaporte.ph</p>
-    <p>See all available appointment timeslots for the whole month!</p>
+    <div className="pointer large">
+      <h1 className="site-title">
+        Pasaporte.
+        <span>ph</span>
+      </h1>
+    </div>
+    <p className="slogan">See all available appointment timeslots for the whole month!</p>
     <SiteSelector />
     {props.sites.length ? (
       <Switch>

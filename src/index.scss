@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
+  font-family: Lato, "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -29,6 +29,11 @@ code {
   @media (min-width: 1276px) {
     left: 318px;
   }
+}
+
+p {
+  margin-top: 0;
+  margin-bottom: 1.5em;
 }
 
 /* =Clearfix

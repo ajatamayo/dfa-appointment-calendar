@@ -29,17 +29,19 @@ class SiteSelector extends Component {
     const defaultSiteId = defaultSite ? defaultSite.Id : null;
     return (
       <Fragment>
-        <p>First, select a site:</p>
-        <Select
-          size="large"
-          onChange={this.onSiteSelect}
-          style={{ minWidth: 360 }}
-          defaultValue={defaultSiteId}
-        >
-          {sites.map(o => (
-            <Option key={o.Id} value={o.Id}>{o.Name}</Option>
-          ))}
-        </Select>
+        <p className="pointer">First, select a site:</p>
+        <div className="site-selector-container">
+          <Select
+            size="large"
+            onChange={this.onSiteSelect}
+            defaultValue={defaultSiteId}
+            className="site-selector"
+          >
+            {sites.map(o => (
+              <Option key={o.Id} value={o.Id}>{o.Name}</Option>
+            ))}
+          </Select>
+        </div>
       </Fragment>
     );
   }
