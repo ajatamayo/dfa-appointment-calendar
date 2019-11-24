@@ -66,7 +66,7 @@ class Dates extends Component {
         <Main>
           {sites.length ? (
             <Calendar
-              className="calendar"
+              className={`calendar ${!activeMonth ? 'hide-dates' : ''}`}
               dateCellRender={this.dateCellRender}
               onPanelChange={this.onPanelChange}
               validRange={validRange}
@@ -93,9 +93,9 @@ class Dates extends Component {
               )}
             />
           ) : null}
-          {isFetching && sites.length ? <Spin /> : null}
+          {isFetching && sites.length && !activeMonth ? <Spin /> : null}
           <div className="calendar-list">
-            {!isFetching ? (
+            {!isFetching && activeMonth ? (
               Object.keys(dates).map((i) => {
                 if (dates[i]) {
                   return (

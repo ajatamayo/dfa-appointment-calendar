@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
   Route,
   Switch,
-  Link,
   withRouter,
 } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -20,7 +19,7 @@ import './App.css';
 const App = props => (
   <div className="app">
     <AppAlert />
-    <p><Link to="/">pasaporte.ph</Link></p>
+    <p>pasaporte.ph</p>
     <p>See all available appointment timeslots for the whole month!</p>
     <SiteSelector />
     {props.sites.length ? (

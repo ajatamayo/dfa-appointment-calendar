@@ -62,6 +62,10 @@
   .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-value {
     color: $indigo;
   }
+
+  .calendar.hide-dates {
+    display: none;
+  }
 }
 
 .calendar-list {
