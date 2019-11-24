@@ -20,6 +20,26 @@ code {
   float: none;
 }
 
+.ant-btn:hover, .ant-btn:focus {
+  border-color: $yellow;
+  color: darken($yellow, 40);
+}
+
+.ant-btn-primary.ant-btn-primary {
+  background: $yellow;
+  border-color: $yellow;
+  color: $black;
+}
+
+.ant-btn.ant-btn {
+  font-family: $serif-font-stack;
+}
+
+.ant-btn-group .ant-btn-primary:not(:first-child):not(:last-child) {
+  border-right-color: $yellow;
+  border-left-color: $yellow;
+}
+
 .ant-spin {
   @media (min-width: 1040px) {
     position: fixed;
