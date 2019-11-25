@@ -6,6 +6,7 @@ import {
   GET_DATES_FAILURE,
   SET_DATE,
   SET_MONTH,
+  SET_SITE,
 } from '../actions/actionTypes';
 
 const initialState = {
@@ -54,6 +55,18 @@ function datesReducer(state = initialState, action) {
       return {
         ...state,
         activeMonth: action.date,
+      };
+    }
+
+    case SET_SITE: {
+      if (action.siteId) {
+        return {
+          ...state,
+          isFetching: true,
+        };
+      }
+      return {
+        ...state,
       };
     }
 

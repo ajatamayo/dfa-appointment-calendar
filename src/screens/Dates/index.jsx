@@ -66,7 +66,7 @@ class Dates extends Component {
         <Main>
           {sites.length ? (
             <Calendar
-              className={`calendar ${!activeMonth || isFetching ? 'hide-dates' : ''}`}
+              className={`calendar ${!activeMonth || isFetching || !Object.values(dates).some(Boolean) ? 'hide-dates' : ''}`}
               dateCellRender={this.dateCellRender}
               onPanelChange={this.onPanelChange}
               validRange={validRange}
@@ -98,7 +98,13 @@ class Dates extends Component {
                     </ButtonGroup>
                   </div>
                   {!isFetching && activeMonth ? (
-                    <p className="slogan">Here are all available slots per day for this month. Enjoy!</p>
+                    <p className="slogan">
+                      {Object.values(dates).some(Boolean) ? (
+                        `Here are all available slots for ${value.format('MMMM YYYY')}. Enjoy!`
+                      ) : (
+                        `Oops, seems like there aren't any more slots for ${value.format('MMMM YYYY')}. You should check again in 5 minutes or so, some slots do get freed up! Goodluck!`
+                      )}
+                    </p>
                   ) : null}
                   {isFetching && activeMonth ? (
                     <Loading text="Fetching timeslots ..." />
