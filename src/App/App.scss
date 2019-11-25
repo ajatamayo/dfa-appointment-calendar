@@ -100,6 +100,10 @@
 
   a {
     color: $black;
+
+    &:focus {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -110,5 +114,43 @@
 
   @media (min-width: 861px) {
     padding-left: 20px;
+  }
+}
+
+.whats-this {
+  background: none;
+  border: none;
+  outline: none;
+  font-style: italic;
+
+  &:hover {
+    color: darken($yellow, 10);
+    cursor: pointer;
+
+    span {
+      border-bottom-color: darken($yellow, 10);
+    }
+  }
+
+  &:active {
+    color: $yellow;
+
+    span {
+      border-bottom-color: $yellow;
+    }
+  }
+
+  &:focus {
+    outline: none;
+    color: darken($yellow, 10);
+
+    span {
+      border-bottom-width: 1px;
+      border-bottom-color: darken($yellow, 10);
+    }
+  }
+
+  span {
+    border-bottom: 1px dashed $black;
   }
 }
