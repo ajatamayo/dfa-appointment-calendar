@@ -38,6 +38,10 @@ code {
   border-left-color: $yellow;
 }
 
+.ant-btn-group .ant-btn-primary:first-child:not(:last-child) {
+  border-right-color: $yellow;
+}
+
 .ant-btn-group .ant-btn-primary:last-child:not(:first-child),
 .ant-btn-group .ant-btn-primary + .ant-btn-primary {
   border-left-color: $yellow;
@@ -60,17 +64,6 @@ code {
 
 .ant-select-dropdown-menu-item-active:not(.ant-select-dropdown-menu-item-disabled) {
   background-color: rgba($yellow, 0.5);
-}
-
-.ant-spin {
-  @media (min-width: 1040px) {
-    position: fixed;
-    left: 247px;
-    top: 60px;
-  }
-  @media (min-width: 1276px) {
-    left: 318px;
-  }
 }
 
 p {

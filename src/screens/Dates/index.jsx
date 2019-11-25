@@ -2,10 +2,10 @@ import moment from 'moment';
 import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Button, Calendar, Spin } from 'antd';
+import { Button, Calendar } from 'antd';
 import { getDatesRequest, setDate, setMonth } from '../../actions/dateActions';
 import {
-  Main, Timeslots,
+  Loading, Main, Timeslots,
 } from '../../components';
 import './calendar.css';
 
@@ -66,7 +66,7 @@ class Dates extends Component {
         <Main>
           {sites.length ? (
             <Calendar
-              className={`calendar ${!activeMonth ? 'hide-dates' : ''}`}
+              className={`calendar ${!activeMonth || isFetching ? 'hide-dates' : ''}`}
               dateCellRender={this.dateCellRender}
               onPanelChange={this.onPanelChange}
               validRange={validRange}
@@ -97,14 +97,16 @@ class Dates extends Component {
                       ))}
                     </ButtonGroup>
                   </div>
-                  {activeMonth ? (
+                  {!isFetching && activeMonth ? (
                     <p className="slogan">Here are all available slots per day for this month. Enjoy!</p>
+                  ) : null}
+                  {isFetching && activeMonth ? (
+                    <Loading text="Fetching timeslots ..." />
                   ) : null}
                 </Fragment>
               )}
             />
           ) : null}
-          {isFetching && sites.length && !activeMonth ? <Spin /> : null}
           <div className="calendar-list">
             {!isFetching && activeMonth ? (
               Object.keys(dates).map((i) => {

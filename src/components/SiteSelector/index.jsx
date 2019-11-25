@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Select } from 'antd';
 import { getSitesRequest, setSite } from '../../actions/siteActions';
+import { Loading } from '..';
 import './siteselector.css';
 
 const { Option } = Select;
@@ -20,28 +21,28 @@ class SiteSelector extends Component {
 
   render() {
     const { sites, pathname } = this.props;
-    if (!sites.length) {
-      return <p>Loading sites...</p>;
-    }
-
     const defaultSiteSlug = pathname.length ? pathname.split('/')[1] : '';
     const defaultSite = sites.find(site => site.slug === defaultSiteSlug);
     const defaultSiteId = defaultSite ? defaultSite.Id : null;
     return (
       <Fragment>
         <p className="pointer">First, select a site:</p>
-        <div className="site-selector-container">
-          <Select
-            size="large"
-            onChange={this.onSiteSelect}
-            defaultValue={defaultSiteId}
-            className="site-selector"
-          >
-            {sites.map(o => (
-              <Option key={o.Id} value={o.Id}>{o.Name}</Option>
-            ))}
-          </Select>
-        </div>
+        {sites.length ? (
+          <div className="site-selector-container">
+            <Select
+              size="large"
+              onChange={this.onSiteSelect}
+              defaultValue={defaultSiteId}
+              className="site-selector"
+            >
+              {sites.map(o => (
+                <Option key={o.Id} value={o.Id}>{o.Name}</Option>
+              ))}
+            </Select>
+          </div>
+        ) : (
+          <Loading text="Loading sites ..." />
+        )}
       </Fragment>
     );
   }
