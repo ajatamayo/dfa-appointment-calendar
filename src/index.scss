@@ -8,7 +8,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: white;
+  background-image: url(/bg.png);
+  background-size: 500px 500px;
+  background-repeat: repeat;
 }
 
 code {
@@ -37,6 +39,11 @@ code {
 
 .ant-btn-group .ant-btn-primary:not(:first-child):not(:last-child) {
   border-right-color: $yellow;
+  border-left-color: $yellow;
+}
+
+.ant-btn-group .ant-btn-primary:last-child:not(:first-child),
+.ant-btn-group .ant-btn-primary + .ant-btn-primary {
   border-left-color: $yellow;
 }
 

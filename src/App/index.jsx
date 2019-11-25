@@ -21,8 +21,10 @@ const App = props => (
     <AppAlert />
     <div className="pointer large">
       <h1 className="site-title">
-        Pasaporte.
-        <span>ph</span>
+        <a href="/">
+          Pasaporte.
+          <span>ph</span>
+        </a>
       </h1>
     </div>
     <p className="slogan">See all available appointment timeslots for the whole month!</p>
