@@ -65,7 +65,7 @@ class App extends Component {
         <p className="slogan">
           See all available appointment timeslots for the whole month!
           <button type="button" className="whats-this" tabIndex="0" onClick={this.showWhatsThis}>
-            <span>What now?</span>
+            <span>About this site.</span>
           </button>
         </p>
         <SiteSelector />
