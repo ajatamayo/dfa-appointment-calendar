@@ -34,6 +34,11 @@ class SiteSelector extends Component {
               onChange={this.onSiteSelect}
               defaultValue={defaultSiteId}
               className="site-selector"
+              showSearch
+              filterOption={(input, option) => {
+                const text = option.props.children.toLowerCase();
+                return text.indexOf(input.toLowerCase()) >= 0;
+              }}
             >
               {sites.map(o => (
                 <Option key={o.Id} value={o.Id}>{o.Name}</Option>
