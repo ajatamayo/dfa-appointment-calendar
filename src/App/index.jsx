@@ -45,7 +45,8 @@ class App extends Component {
       description: (
         <Fragment>
           {/* eslint-disable-next-line react/jsx-one-expression-per-line,max-len */}
-          Instead of searching for an available passport appointment slot over at <strong>passport.gov.ph</strong> one day at a time, <strong>pasaporte.ph</strong> shows you all available appointment timeslots for the whole month!
+          <p>Instead of searching for an available passport appointment slot over at <strong>passport.gov.ph</strong> one day at a time, <strong>pasaporte.ph</strong> shows you all available appointment timeslots for the whole month!</p>
+          <p className="image-credit"><a href="https://www.freepik.com/free-photos-vectors/background">Background vector created by freepik - www.freepik.com</a></p>
         </Fragment>
       ),
       duration: 0,
