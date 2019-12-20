@@ -15,6 +15,7 @@ import {
   Dates,
   Sites,
 } from '../screens';
+import { clearStaleLocalStorage } from '../helpers/apiClient';
 import './App.css';
 
 class App extends Component {
@@ -27,6 +28,10 @@ class App extends Component {
 
     this.showWhatsThis = this.showWhatsThis.bind(this);
     this.onNotifClose = this.onNotifClose.bind(this);
+  }
+
+  componentDidMount() {
+    clearStaleLocalStorage();
   }
 
   onNotifClose() {

@@ -65,6 +65,20 @@ function storageAvailable(type) {
   }
 }
 
+export function clearStaleLocalStorage() {
+  if (storageAvailable('localStorage')) {
+    const lastUpdated = localStorage.getItem('lastUpdated');
+    if (lastUpdated) {
+      const elapsedTime = new Date() - new Date(JSON.parse(lastUpdated));
+      if (elapsedTime > config.localStorageStaleLifetime) {
+        localStorage.clear();
+      }
+    } else {
+      localStorage.setItem('lastUpdated', JSON.stringify(new Date()));
+    }
+  }
+}
+
 function createApiClient() {
   return {
     get(...args) {

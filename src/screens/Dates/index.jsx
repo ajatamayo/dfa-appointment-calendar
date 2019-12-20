@@ -100,7 +100,7 @@ class Dates extends Component {
                   {!isFetching && activeMonth ? (
                     <p className="slogan">
                       {Object.values(dates).some(Boolean) ? (
-                        `Here are all available slots for ${value.format('MMMM YYYY')}. Enjoy!`
+                        `Here are all available slots for individual appointments for ${value.format('MMMM YYYY')}.`
                       ) : (
                         `Oops, seems like there aren't any more slots for ${value.format('MMMM YYYY')}. You should check again in 5 minutes or so, some slots do get freed up! Goodluck!`
                       )}

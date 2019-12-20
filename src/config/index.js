@@ -3,4 +3,7 @@ module.exports = {
   localStorageCacheLifetime: parseInt(
     process.env.REACT_APP_LOCAL_STORAGE_CACHE_LIFETIME || 300000, 10,
   ),
+  localStorageStaleLifetime: parseInt(
+    process.env.REACT_APP_LOCAL_STORAGE_STALE_LIFETIME || 86400000, 10,
+  ),
 };
