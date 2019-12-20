@@ -1,6 +1,6 @@
 {
-  "short_name": "AQWIRE",
-  "name": "AQWIRE",
+  "short_name": "pasaporte.ph",
+  "name": "pasaporte.ph",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -15,6 +15,6 @@
   ],
   "start_url": "./index.html",
   "display": "standalone",
-  "theme_color": "#36d1dc",
-  "background_color": "#36d1dc"
+  "theme_color": "#f6c333",
+  "background_color": "#f6c333"
 }
