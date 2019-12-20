@@ -24,13 +24,4 @@
       font-size: 11px;
     }
   }
-
-  border: 1px solid transparent;
-
-  &:focus {
-    outline: none;
-    color: darken($yellow, 10);
-    border: 1px solid darken($yellow, 10);
-    border-radius: 2px;
-  }
 }

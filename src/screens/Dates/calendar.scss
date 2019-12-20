@@ -26,10 +26,15 @@
     height: 131px;
   }
 
+  .ant-fullcalendar-selected-day .ant-fullcalendar-content {
+    color: darken($yellow, 10);
+  }
+
   .ant-fullcalendar-fullscreen .ant-fullcalendar-date {
     height: 134px;
     padding: 4px 6px;
-    border-top-width: 1px;
+    border: 1px solid transparent;
+    border-top: 1px solid #e8e8e8;
   }
 
   .ant-fullcalendar-header {
@@ -46,11 +51,12 @@
   .ant-fullcalendar-fullscreen .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-month,
   .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-date {
     background: none;
+    border: 1px solid rgba($yellow, 0.8);
   }
 
   .ant-fullcalendar-fullscreen .ant-fullcalendar-month-panel-selected-cell .ant-fullcalendar-value,
   .ant-fullcalendar-fullscreen .ant-fullcalendar-selected-day .ant-fullcalendar-value {
-    color: rgba(0, 0, 0, 0.65);
+      color: darken($yellow, 10);
   }
 
   .ant-fullcalendar-fullscreen .ant-fullcalendar-month:hover,
@@ -98,6 +104,20 @@
   .calendar-list-item {
     flex-basis: 100px;
     margin-bottom: 20px;
+
+    border: 1px solid transparent;
+    cursor: pointer;
+
+    &:focus {
+      outline: none;
+      color: darken($yellow, 10);
+      border: 1px solid rgba($yellow, 0.8);
+      border-radius: 2px;
+    }
+
+    &:hover {
+      background: rgba($yellow, 0.1);
+    }
   }
 
   .date-day-month {
